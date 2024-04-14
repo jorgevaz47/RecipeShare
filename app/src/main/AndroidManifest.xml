@@ -13,6 +13,9 @@
         android:theme="@style/Theme.RecipeShare"
         tools:targetApi="31">
         <activity
+            android:name=".ExploreRecipesPage"
+            android:exported="false" />
+        <activity
             android:name=".SignUpPage"
             android:exported="false" />
         <activity
