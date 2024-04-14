@@ -6,4 +6,11 @@
     <string name="password">Password</string>
     <string name="log_in">Log In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="welcome_user">Welcome User!</string>
+    <string name="explore_recipes">Explore Recipes</string>
+    <string name="my_recipes">My Recipes</string>
+    <string name="favorite_recipes">Favorite Recipes</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="admin">Admin</string>
 </resources>
