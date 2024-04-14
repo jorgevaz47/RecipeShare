@@ -1,4 +1,4 @@
-package com.example.recipeshare.Database;
+package com.example.recipeshare.database;
 
 public class RecipeLogRepository {
     //Refer to Gymlog video 3 @ 40 min
