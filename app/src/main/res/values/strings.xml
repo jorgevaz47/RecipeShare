@@ -2,4 +2,6 @@
     <string name="app_name">RecipeShare</string>
     <string name="recipe_share">Recipe Share</string>
     <string name="please_sign_in">Please Sign In</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>
