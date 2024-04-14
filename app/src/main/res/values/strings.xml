@@ -17,4 +17,5 @@
     <string name="create_account">Create Account</string>
     <string name="explore_recipes_title">Explore Recipes</string>
     <string name="back">Back</string>
+    <string name="my_recipes_title">My Recipes</string>
 </resources>
