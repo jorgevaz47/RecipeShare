@@ -4,4 +4,6 @@
     <string name="please_sign_in">Please Sign In</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
