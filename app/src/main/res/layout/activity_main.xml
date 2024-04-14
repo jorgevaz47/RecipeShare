@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/welcomeUser"
+        android:id="@+id/welcomeUserTitle"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginTop="48dp"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeUser" />
+        app:layout_constraintTop_toBottomOf="@id/welcomeUserTitle" />
 
     <Button
         android:id="@+id/myRecipesButton"

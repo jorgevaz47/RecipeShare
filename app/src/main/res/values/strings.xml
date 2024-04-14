@@ -15,4 +15,6 @@
     <string name="admin">Admin</string>
     <string name="please_sign_up">Please Sign Up</string>
     <string name="create_account">Create Account</string>
+    <string name="explore_recipes_title">Explore Recipes</string>
+    <string name="back">Back</string>
 </resources>
