@@ -22,13 +22,26 @@
     <Button
         android:id="@+id/backButtonMyRecipes"
         android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_height="57dp"
         android:layout_marginTop="16dp"
         android:onClick="TEST_GOES_TO_LANDING_PAGE_TEST"
         android:text="@string/back"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addRecipesButton"
+        android:layout_width="100dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:onClick="TEST_GOES_TO_ADD_RECIPES_PAGE_TEST"
+        android:text="@string/add_recipe"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
