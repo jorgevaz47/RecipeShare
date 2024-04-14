@@ -19,4 +19,5 @@
     <string name="back">Back</string>
     <string name="my_recipes_title">My Recipes</string>
     <string name="add_recipe">Add Recipe</string>
+    <string name="favorite_recipes_title">Favorite Recipes</string>
 </resources>
