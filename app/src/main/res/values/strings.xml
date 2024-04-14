@@ -13,4 +13,6 @@
     <string name="logout">Logout</string>
     <string name="delete_account">Delete Account</string>
     <string name="admin">Admin</string>
+    <string name="please_sign_up">Please Sign Up</string>
+    <string name="create_account">Create Account</string>
 </resources>
