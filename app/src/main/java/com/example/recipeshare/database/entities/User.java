@@ -8,14 +8,14 @@ import com.example.recipeshare.database.RecipeLogDatabase;
 import java.util.Objects;
 
 @Entity(tableName = RecipeLogDatabase.USER_TABLE)
-public class Users {
+public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String username;
     private String password;
     private boolean isAdmin;
 
-    public Users(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
         isAdmin = false;
@@ -25,7 +25,7 @@ public class Users {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Users users = (Users) o;
+        User users = (User) o;
         return id == users.id && isAdmin == users.isAdmin && Objects.equals(username, users.username) && Objects.equals(password, users.password);
     }
 
