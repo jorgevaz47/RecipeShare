@@ -21,4 +21,6 @@ public interface UserDAO {
     @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " ORDER BY username")
     List<User> getAllUsers();
 
+    @Query("DELETE from " + RecipeLogDatabase.USER_TABLE)
+    void deleteAll();
 }

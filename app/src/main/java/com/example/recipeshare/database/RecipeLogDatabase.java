@@ -18,12 +18,13 @@ import java.util.concurrent.Executors;
 
 //TODO: Refer to Gymlog video 3 @ 16 min
 
-@Database(entities = {RecipeLog.class, User.class}, version = 2, exportSchema = false)
+//TODO: version represents the dimension of our database, I think it's 1 idk...on Video7 @ 24min
+@Database(entities = {RecipeLog.class, User.class}, version = 1, exportSchema = false)
 public abstract class RecipeLogDatabase extends RoomDatabase {
 
-    private static final String DATABASE_NAME = "RecipeLog_database";
+    private static final String DATABASE_NAME = "RecipeLogDatabase";
     public static final String RECIPE_LOG_TABLE = "recipeLogTable";
-    public static final String USER_TABLE = "user_table";
+    public static final String USER_TABLE = "userTable";
     private static volatile RecipeLogDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4; //TODO: is this correct?
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
@@ -52,7 +53,16 @@ public abstract class RecipeLogDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE CREATED!");
-            //TODO: add databaseWriteExecutor.execute(() -> {...}
+            databaseWriteExecutor.execute(() -> {
+                UserDAO dao = INSTANCE.userDAO();
+                dao.deleteAll();
+                User admin = new User("admin1", "admin1");
+                admin.setAdmin(true);
+                dao.insert(admin);
+
+                User testUser1 = new User("testuser1", "testuser1");
+                dao.insert(testUser1);
+            });
         }
     };
 

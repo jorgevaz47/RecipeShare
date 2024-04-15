@@ -16,12 +16,35 @@ import java.util.concurrent.Future;
 public class RecipeLogRepository {
     private final RecipeLogDAO recipeLogDAO;
     private ArrayList<RecipeLog> allLogs;
+    private static RecipeLogRepository repository;
+
     private final UserDAO userDAO;
 
     private RecipeLogRepository(Application application) {
         RecipeLogDatabase db = RecipeLogDatabase.getDatabase(application);
         this.recipeLogDAO = db.recipeLogDAO();
-        this.allLogs = this.recipeLogDAO.getAllRecords();
+        this.userDAO = db.userDAO();
+        this.allLogs = (ArrayList<RecipeLog>) this.recipeLogDAO.getAllRecords();
+    }
+
+    public static RecipeLogRepository getRepository(Application application){
+        if (repository != null){
+            return repository;
+        }
+        Future<RecipeLogRepository> future = RecipeLogDatabase.databaseWriteExecutor.submit(
+                new Callable<RecipeLogRepository>() {
+                    @Override
+                    public RecipeLogRepository call() throws Exception {
+                        return new RecipeLogRepository(application);
+                    }
+                }
+        );
+        try{
+            return future.get();
+        }catch (InterruptedException | ExecutionException e){
+            Log.d(MainActivity.TAG, "Problem getting RecipeLogRepository, thread error.");
+        }
+        return null;
     }
 
     public ArrayList<RecipeLog> getAllLogs() {
@@ -29,15 +52,14 @@ public class RecipeLogRepository {
                 new Callable<ArrayList<RecipeLog>>() {
                     @Override
                     public ArrayList<RecipeLog> call() throws Exception {
-                        return recipeLogDAO.getAllRecords();
+                        return (ArrayList<RecipeLog>) recipeLogDAO.getAllRecords();
                     }
-                }
-        );
+                });
         try{
             return future.get();
         }catch (InterruptedException | ExecutionException e){
             e.printStackTrace();
-            Log.i(MainActivity.TAG, "Problem when getting all Recipelogs in repository");
+            Log.i(MainActivity.TAG, "Problem when getting all RecipeLogs in repository");
         }
         return null;
     }

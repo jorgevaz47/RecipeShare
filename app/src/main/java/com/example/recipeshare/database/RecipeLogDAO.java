@@ -18,6 +18,6 @@ public interface RecipeLogDAO {
     void insert(RecipeLog recipeLog);
 
     @Query("SELECT * FROM " + RecipeLogDatabase.RECIPE_LOG_TABLE)
-    ArrayList<RecipeLog> getAllRecords();
+    List<RecipeLog> getAllRecords();
 
 }
