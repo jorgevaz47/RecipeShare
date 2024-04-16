@@ -23,7 +23,8 @@ public class LoginPage extends AppCompatActivity {
         binding.logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginPage.this, "Working", Toast.LENGTH_SHORT).show();
+                Intent intent = MainActivity.mainActivityPageIntentFactory(getApplicationContext(), 1);
+                startActivity(intent);
             }
         });
 
