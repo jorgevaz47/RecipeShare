@@ -2,6 +2,8 @@ package com.example.recipeshare;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -21,9 +23,14 @@ public class LoginPage extends AppCompatActivity {
         binding.logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginPage.this, "Working", Toast.LENGTH_SHORT).show();
+                Intent intent = MainActivity.mainActivityPageIntentFactory(getApplicationContext(), 1);
+                startActivity(intent);
             }
         });
 
+    }
+
+    static Intent loginIntentFactory(Context context){
+        return new Intent(context, LoginPage.class);
     }
 }
