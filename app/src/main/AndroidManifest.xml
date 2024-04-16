@@ -25,7 +25,7 @@
             android:name=".MyRecipes"
             android:exported="false" />
         <activity
-            android:name=".ExploreRecipesPage"
+            android:name=".LoginPage"
             android:exported="false" />
         <activity
             android:name=".SignUpPage"
@@ -34,7 +34,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginPage"
+            android:name=".ExploreRecipesPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
