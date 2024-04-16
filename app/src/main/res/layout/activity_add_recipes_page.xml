@@ -32,4 +32,106 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/addIngredients"
+        android:layout_width="132dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/ingredients"
+        android:textSize="23sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addName" />
+
+    <EditText
+        android:layout_width="252dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:inputType="textAutoComplete"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/addIngredients"
+        app:layout_constraintStart_toEndOf="@id/addIngredients"
+        android:hint="@string/enter_ingredients"
+        />
+
+    <TextView
+        android:id="@+id/addInstructions"
+        android:layout_width="132dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/instructions"
+        android:textSize="23sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addIngredients" />
+
+    <EditText
+        android:layout_width="252dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:inputType="textAutoComplete"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/addInstructions"
+        app:layout_constraintStart_toEndOf="@id/addInstructions"
+        android:hint="@string/enter_instructions"
+        />
+
+    <TextView
+        android:id="@+id/addName"
+        android:layout_width="132dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/name"
+        android:textSize="23sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addRecipesPageTitle" />
+
+    <EditText
+        android:layout_width="252dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:inputType="textAutoComplete"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/addName"
+        app:layout_constraintStart_toEndOf="@id/addName"
+        android:hint="@string/enter_name"
+        />
+
+    <TextView
+        android:id="@+id/addCreatedBy"
+        android:layout_width="132dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/created_by"
+        android:textSize="23sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addInstructions" />
+
+    <EditText
+        android:layout_width="252dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:inputType="textAutoComplete"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/addCreatedBy"
+        app:layout_constraintStart_toEndOf="@id/addCreatedBy"
+        android:hint="@string/enter_username"
+        />
+
+    <Button
+        android:id="@+id/addRecipeSubmitButton"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="48dp"
+        android:onClick="TEST_GOES_TO_MY_RECIPES_PAGE_TEST"
+        android:text="@string/add_recipe_submit"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addCreatedBy" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

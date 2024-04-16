@@ -22,4 +22,13 @@
     <string name="favorite_recipes_title">Favorite Recipes</string>
     <string name="admin_tools">Admin Tools</string>
     <string name="add_recipes">Add Recipes</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="enter_ingredients">Enter Ingredients</string>
+    <string name="enter_instructions">Enter Instructions</string>
+    <string name="instructions">Instructions:</string>
+    <string name="name">Name:</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="created_by">Created By:</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="add_recipe_submit">Add Recipe</string>
 </resources>
