@@ -11,6 +11,7 @@ import android.widget.Button;
 public class MyRecipes extends AppCompatActivity {
 
     Button backButton;
+    Button addButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,16 @@ public class MyRecipes extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        addButton = findViewById(R.id.addRecipesButton);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyRecipes.this, AddRecipesPage.class);
+                startActivity(intent);
             }
         });
     }
