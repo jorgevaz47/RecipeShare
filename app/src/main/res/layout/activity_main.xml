@@ -68,28 +68,4 @@
         app:layout_constraintTop_toBottomOf="@id/favoriteRecipesButton"
         />
 
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/logout"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/deleteAccountButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="668dp"
-        android:text="@string/delete_account"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

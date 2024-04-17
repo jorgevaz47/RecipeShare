@@ -14,6 +14,7 @@ import java.util.concurrent.Future;
 
 //TODO: Refer to Gymlog video 3 @ 40 min
 public class RecipeLogRepository {
+    private static final String TAG = "com.example.recipeshare.database.RECIPE_LOG_REPOSITORY";
     private final RecipeLogDAO recipeLogDAO;
     private ArrayList<RecipeLog> allLogs;
     private static RecipeLogRepository repository;
@@ -78,4 +79,19 @@ public class RecipeLogRepository {
         });
     }
 
+    public User getUserByUserName(String username) {
+        Future<User> future = RecipeLogDatabase.databaseWriteExecutor.submit(
+                new Callable<User>() {
+                    @Override
+                    public User call() throws Exception {
+                        return userDAO.getUserByUserName(username);
+                    }
+                });
+        try{
+            future.get();
+        } catch (InterruptedException | ExecutionException e){
+            Log.i(RecipeLogRepository.TAG, "Problem retrieving user by username from repository");
+        }
+        return null;
+    }
 }
