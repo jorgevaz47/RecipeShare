@@ -74,6 +74,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdminPage.adminIntentFactory(MainActivity.this);
+                startActivity(intent);
+            }
+        });
+
         //todo: working on video 5, wondering if all this data should be on main or diff class
     }
 
