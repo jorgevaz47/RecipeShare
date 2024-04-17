@@ -3,6 +3,8 @@ package com.example.recipeshare.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.recipeshare.MainActivity;
 import com.example.recipeshare.database.entities.RecipeLog;
 import com.example.recipeshare.database.entities.User;
@@ -79,19 +81,7 @@ public class RecipeLogRepository {
         });
     }
 
-    public User getUserByUserName(String username) {
-        Future<User> future = RecipeLogDatabase.databaseWriteExecutor.submit(
-                new Callable<User>() {
-                    @Override
-                    public User call() throws Exception {
-                        return userDAO.getUserByUserName(username);
-                    }
-                });
-        try{
-            future.get();
-        } catch (InterruptedException | ExecutionException e){
-            Log.i(RecipeLogRepository.TAG, "Problem retrieving user by username from repository");
-        }
-        return null;
+    public LiveData<User> getUserByUserName(String username) {
+        return userDAO.getUserByUserName(username);
     }
 }

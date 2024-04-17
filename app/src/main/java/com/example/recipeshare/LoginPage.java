@@ -1,6 +1,7 @@
 package com.example.recipeshare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +18,6 @@ public class LoginPage extends AppCompatActivity {
     ActivityLoginPageBinding binding;
 
     private RecipeLogRepository repository;
-    private User user = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +30,7 @@ public class LoginPage extends AppCompatActivity {
         binding.logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!verifyUser()){
-                    Toast.makeText(LoginPage.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-                } else{
-                    Intent intent = MainActivity.mainActivityPageIntentFactory(getApplicationContext(), user.getId());
-                    startActivity(intent);
-                }
+                verifyUser();
             }
         });
 
@@ -48,18 +43,24 @@ public class LoginPage extends AppCompatActivity {
         });
     }
 
-    private boolean verifyUser() {
+    private void verifyUser() {
         String username = binding.editUsername.getText().toString();
         String password = binding.editPassword.getText().toString();
         if(username.isEmpty() || password.isEmpty()){
-            return false;
+            return;
         }
-        user = repository.getUserByUserName(username);
-
-        if(user != null){
-            return password.equals(user.getPassword());
-        }
-        return false;
+        LiveData<User> userObserver = repository.getUserByUserName(username);
+        userObserver.observe(this, user -> {
+            if(user != null){
+                if(password.equals(user.getPassword())){
+                    startActivity(MainActivity.mainActivityPageIntentFactory(getApplicationContext(), user.getId()));
+                } else {
+                    Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
+                }
+            } else{
+                Toast.makeText(this, "Not a valid username", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     static Intent loginIntentFactory(Context context){
