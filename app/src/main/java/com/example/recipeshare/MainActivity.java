@@ -72,7 +72,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //TODO: Issue here with .setting_menu
-    /*@Override
+    /*
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.settings_menu, menu);
@@ -92,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return true;
-    } */
+    }
+    */
 
     private void showSettingsDialog(){
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
