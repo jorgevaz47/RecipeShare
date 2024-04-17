@@ -84,4 +84,8 @@ public class RecipeLogRepository {
     public LiveData<User> getUserByUserName(String username) {
         return userDAO.getUserByUserName(username);
     }
+
+    public LiveData<User> getUserByUserID(int loggedUserID) {
+        return userDAO.getUserByUserID(loggedUserID);
+    }
 }

@@ -3,15 +3,19 @@ package com.example.recipeshare;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.recipeshare.database.RecipeLogRepository;
 import com.example.recipeshare.database.entities.RecipeLog;
@@ -20,9 +24,13 @@ import com.example.recipeshare.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int LOGGED_OUT = -1;
+    private static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.recipeshare.SAVED_INSTANCE_STATE_USERID_KEY";
     ActivityMainBinding binding;
     private RecipeLogRepository repository;
     private static final String MAIN_ACTIVITY_PAGE_USER_ID = "com.example.recipeshare.MAIN_ACTIVITY_PAGE_USER_ID";
+    static final String SHARED_PREFERENCE_USERID_KEY = "com.example.recipeshare.SHARED_PREFERENCE_USERID_KEY";
+    static final String SHARED_PREFERENCE_USERID_VALUE = "com.example.recipeshare.SHARED_PREFERENCE_USERID_VALUE";
     public static final String TAG = "DAC_RECIPELOG";
     String mName = "";
     String mIngredients = "";
@@ -41,12 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
         repository = RecipeLogRepository.getRepository(getApplication());
 
-        loginUser();
-        invalidateOptionsMenu();
+        loginUser(savedInstanceState);
 
         if(loggedUserID == -1){
             Intent intent = LoginPage.loginIntentFactory(getApplicationContext());
             startActivity(intent);
+        } else{
+            // TODO: This is causing errors so far even with the implemented login. When retrieving a user with LiveData, it still says the user variable is null
+//            TextView textView = findViewById(R.id.welcomeUserTitle);
+//            textView.setText(String.format(getString(R.string.welcome_user), user.getUsername()));
         }
 
         binding.myRecipesButton.setOnClickListener(new View.OnClickListener() {
@@ -89,11 +100,44 @@ public class MainActivity extends AppCompatActivity {
         repository.insertRecipeLog(log);
     }
 
-    private void loginUser() {
-        // TODO: Make login function functional
-        loggedUserID = getIntent().getIntExtra(MAIN_ACTIVITY_PAGE_USER_ID, -1);
+    private void loginUser(Bundle savedInstanceState) {
+        // Check shared preferences for logged in user
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+
+        if(sharedPreferences.contains(SHARED_PREFERENCE_USERID_KEY)){
+            loggedUserID = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
+        }
+        if(loggedUserID == LOGGED_OUT & savedInstanceState != null && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)){
+            loggedUserID = savedInstanceState.getInt(SAVED_INSTANCE_STATE_USERID_KEY, LOGGED_OUT);
+        }
+        if(loggedUserID == LOGGED_OUT){
+            loggedUserID = getIntent().getIntExtra(MAIN_ACTIVITY_PAGE_USER_ID, LOGGED_OUT);
+        }
+        if(loggedUserID == LOGGED_OUT){
+            return;
+        }
+
+        LiveData<User> userObserver = repository.getUserByUserID(loggedUserID);
+        userObserver.observe(this, newUser -> {
+            this.user = newUser;
+            if(user != null){
+                invalidateOptionsMenu();
+            } else{
+//                logout();
+            }
+        });
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SAVED_INSTANCE_STATE_USERID_KEY, loggedUserID);
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USERID_KEY,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(MainActivity.SHARED_PREFERENCE_USERID_KEY, loggedUserID);
+        sharedPrefEditor.apply();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,6 +194,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
+        SharedPreferences sharedPreferences = getApplication().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
+        sharedPrefEditor.apply();
+
+        getIntent().putExtra(MAIN_ACTIVITY_PAGE_USER_ID, LOGGED_OUT);
+
         startActivity(LoginPage.loginIntentFactory(getApplicationContext()));
     }
 
