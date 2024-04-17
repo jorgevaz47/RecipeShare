@@ -58,7 +58,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        binding.exploreRecipesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ExploreRecipesPage.exploreRecipesIntentFactory(MainActivity.this);
+                startActivity(intent);
+            }
+        });
         //todo: working on video 5, wondering if all this data should be on main or diff class
     }
 
