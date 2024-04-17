@@ -25,8 +25,4 @@ public class AddRecipesPage extends AppCompatActivity {
             }
         });
     }
-
-    static Intent addRecipesIntentFactory(Context context){
-        return new Intent(context, MyRecipes.class);
-    }
 }
