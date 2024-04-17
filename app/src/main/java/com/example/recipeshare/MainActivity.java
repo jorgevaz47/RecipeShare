@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
         //todo: working on video 5, wondering if all this data should be on main or diff class
     }
 
