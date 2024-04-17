@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 import com.example.recipeshare.database.RecipeLogRepository;
 import com.example.recipeshare.database.entities.RecipeLog;
@@ -48,6 +48,38 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = LoginPage.loginIntentFactory(getApplicationContext());
             startActivity(intent);
         }
+
+        binding.myRecipesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MyRecipes.myRecipesIntentFactory(MainActivity.this);
+                startActivity(intent);
+            }
+        });
+
+        binding.exploreRecipesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ExploreRecipesPage.exploreRecipesIntentFactory(MainActivity.this);
+                startActivity(intent);
+            }
+        });
+
+        binding.favoriteRecipesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = FavoriteRecipesPage.favoriteRecipesIntentFactory(MainActivity.this);
+                startActivity(intent);
+            }
+        });
+
+        binding.adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdminPage.adminIntentFactory(MainActivity.this);
+                startActivity(intent);
+            }
+        });
         //todo: working on video 5, wondering if all this data should be on main or diff class
     }
 
@@ -61,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Make login function functional
         loggedUserID = getIntent().getIntExtra(MAIN_ACTIVITY_PAGE_USER_ID, -1);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -121,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     static Intent mainActivityPageIntentFactory(Context context, int userID){
-        Intent intent = new Intent(context, ExploreRecipesPage.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(MAIN_ACTIVITY_PAGE_USER_ID, userID);
         return intent;
     }

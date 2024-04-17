@@ -28,6 +28,13 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
+        binding.signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SignUpPage.signUpIntentFactory(LoginPage.this);
+                startActivity(intent);
+            }
+        });
     }
 
     static Intent loginIntentFactory(Context context){
