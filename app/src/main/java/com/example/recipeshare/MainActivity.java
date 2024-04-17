@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.recipeshare.database.RecipeLogRepository;
@@ -48,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = LoginPage.loginIntentFactory(getApplicationContext());
             startActivity(intent);
         }
+
+        binding.myRecipesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MyRecipes.myRecipesIntentFactory(MainActivity.this);
+                startActivity(intent);
+            }
+        });
         //todo: working on video 5, wondering if all this data should be on main or diff class
     }
 
