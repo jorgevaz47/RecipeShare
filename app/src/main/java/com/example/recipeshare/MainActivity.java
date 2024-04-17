@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
         loggedUserID = getIntent().getIntExtra(MAIN_ACTIVITY_PAGE_USER_ID, -1);
     }
 
-    @Override
+    //TODO: Issue here with .setting_menu
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.settings_menu, menu);
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return true;
-    }
+    } */
 
     private void showSettingsDialog(){
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     static Intent mainActivityPageIntentFactory(Context context, int userID){
-        Intent intent = new Intent(context, ExploreRecipesPage.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(MAIN_ACTIVITY_PAGE_USER_ID, userID);
         return intent;
     }
