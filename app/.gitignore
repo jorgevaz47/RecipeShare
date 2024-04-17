@@ -19,7 +19,7 @@ gen/
 out/
 
 # Gradle files
-*.gradle
+.gradle
 .gradle/
 build/
 
@@ -127,3 +127,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+.cxx
+.DS_Store
