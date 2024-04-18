@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private RecipeLogRepository repository;
     private static final String MAIN_ACTIVITY_PAGE_USER_ID = "com.example.recipeshare.MAIN_ACTIVITY_PAGE_USER_ID";
     static final String SHARED_PREFERENCE_USERID_KEY = "com.example.recipeshare.SHARED_PREFERENCE_USERID_KEY";
-    static final String SHARED_PREFERENCE_USERID_VALUE = "com.example.recipeshare.SHARED_PREFERENCE_USERID_VALUE";
     public static final String TAG = "DAC_RECIPELOG";
     String mName = "";
     String mIngredients = "";
@@ -64,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 //            textView.setText(String.format(getString(R.string.welcome_user), user.getUsername()));
             Log.d(TAG, "Logged user ID is not -1, user is signed in " + user);
         }
+
+        updateSharedPreference();
 
         binding.myRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,11 +109,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginUser(Bundle savedInstanceState) {
         // Check shared preferences for logged in user
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        if(sharedPreferences.contains(SHARED_PREFERENCE_USERID_KEY)){
-            loggedUserID = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
-        }
+        loggedUserID = sharedPreferences.getInt(getString(R.string.preference_userID_key), LOGGED_OUT);
+
         if(loggedUserID == LOGGED_OUT & savedInstanceState != null && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)){
             loggedUserID = savedInstanceState.getInt(SAVED_INSTANCE_STATE_USERID_KEY, LOGGED_OUT);
         }
@@ -123,12 +123,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        user = repository.getUserByUserID(loggedUserID).getValue();
         LiveData<User> userObserver = repository.getUserByUserID(loggedUserID);
         userObserver.observe(this, user -> {
-            if(this.user != null){
-                invalidateOptionsMenu();
+            if(user != null){
                 populateFields(user);
+                invalidateOptionsMenu();
             }
         });
     }
@@ -142,11 +141,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(SAVED_INSTANCE_STATE_USERID_KEY, loggedUserID);
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USERID_KEY,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.putInt(MainActivity.SHARED_PREFERENCE_USERID_KEY, loggedUserID);
-        sharedPrefEditor.apply();
+        updateSharedPreference();
     }
 
     @Override
@@ -204,14 +199,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        SharedPreferences sharedPreferences = getApplication().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.putInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
-        sharedPrefEditor.apply();
-
-        getIntent().putExtra(MAIN_ACTIVITY_PAGE_USER_ID, LOGGED_OUT);
-
+        loggedUserID = LOGGED_OUT;
+        updateSharedPreference();
         startActivity(LoginPage.loginIntentFactory(getApplicationContext()));
+    }
+
+    private void updateSharedPreference() {
+        SharedPreferences sharedPreferences = getApplication().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(getString(R.string.preference_userID_key), loggedUserID);
+        sharedPrefEditor.apply();
     }
 
     static Intent mainActivityPageIntentFactory(Context context, int userID){

@@ -31,4 +31,6 @@
     <string name="created_by">Created By:</string>
     <string name="enter_username">Enter Username</string>
     <string name="add_recipe_submit">Add Recipe</string>
+    <string name="preference_file_key">recipeSharePreferenceFileKey</string>
+    <string name="preference_userID_key">recipeSharePreferenceUserIDKey</string>
 </resources>
