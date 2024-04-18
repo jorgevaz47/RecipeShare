@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.recipeshare.database.RecipeLogRepository;
@@ -62,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
         // Update the persistent data stored as a SharedPref with the logged-in user ID
         updateSharedPreference();
 
+        addListeners();
+
+    }
+
+    /**
+     * Adds on click listeners to each of the buttons in the main activity
+     */
+    private void addListeners() {
         // Adds a listener to the My Recipes button that takes them to that page
         binding.myRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,15 +94,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = FavoriteRecipesPage.favoriteRecipesIntentFactory(MainActivity.this);
-                startActivity(intent);
-            }
-        });
-
-        // Adds a listener to the Admin button that takes them to that page
-        binding.adminButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = AdminPage.adminIntentFactory(MainActivity.this);
                 startActivity(intent);
             }
         });
@@ -130,8 +130,19 @@ public class MainActivity extends AppCompatActivity {
             if(user != null){
                 populateFields(user);
                 invalidateOptionsMenu();
+                showAdminButton(user.isAdmin());
             }
         });
+    }
+
+    /**
+     * If the user is not an admin, it removes the admin button from the layout's space
+     * @param isAdmin Tells us if the user is an admin or not
+     */
+    private void showAdminButton(boolean isAdmin){
+        if(!isAdmin){
+            binding.adminButton.setVisibility(View.GONE);
+        }
     }
 
     /**
