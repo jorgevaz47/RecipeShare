@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,7 +17,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.recipeshare.database.RecipeLogRepository;
-import com.example.recipeshare.database.entities.RecipeLog;
 import com.example.recipeshare.database.entities.User;
 import com.example.recipeshare.databinding.ActivityMainBinding;
 
