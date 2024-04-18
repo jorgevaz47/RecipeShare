@@ -24,22 +24,26 @@ import com.example.recipeshare.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int LOGGED_OUT = -1;
+    // Keys used to access persistence storage
     private static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.recipeshare.SAVED_INSTANCE_STATE_USERID_KEY";
-    ActivityMainBinding binding;
-    private RecipeLogRepository repository;
     private static final String MAIN_ACTIVITY_PAGE_USER_ID = "com.example.recipeshare.MAIN_ACTIVITY_PAGE_USER_ID";
-    static final String SHARED_PREFERENCE_USERID_KEY = "com.example.recipeshare.SHARED_PREFERENCE_USERID_KEY";
-    public static final String TAG = "DAC_RECIPELOG";
-    String mName = "";
-    String mIngredients = "";
-    String mInstructions = "";
-    String mCreatedBy = "";
-    boolean mIsFavorite = false;
-
-    //TODO: Add login information.. refer video 7 @ 22min
+    // Tag used for debugging purposes
+    public static final String TAG = "RECIPELOG";
+    // Logged out state constant
+    private static final int LOGGED_OUT = -1;
+    // Initial state of logged in user. -1 means no user is logged in
     private int loggedUserID = -1;
-    private User user;
+    private RecipeLogRepository repository;
+    ActivityMainBinding binding;
+
+
+    /**
+     * This method starts up the landing page and checks if there has been a user logged in or not
+     * before displaying information. If no user is logged in, it takes the user to the LoginPage
+     * @param savedInstanceState If the activity is being re-initialized after
+     *                           previously being shut down then this Bundle contains the data it most
+     *                           recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,24 +52,19 @@ public class MainActivity extends AppCompatActivity {
 
         repository = RecipeLogRepository.getRepository(getApplication());
 
-        Log.d(TAG, "User object before login: " + user);
-
+        // Checks if there is a user logged in
         loginUser(savedInstanceState);
 
-        Log.d(TAG, "User object after login: " + user);
-
+        // If no user is logged in, take them to the Login Page
         if(loggedUserID == -1){
             Intent intent = LoginPage.loginIntentFactory(getApplicationContext());
             startActivity(intent);
-        } else{
-            // TODO: This is causing errors so far even with the implemented login. When retrieving a user with LiveData, it still says the user variable is null
-//            TextView textView = findViewById(R.id.welcomeUserTitle);
-//            textView.setText(String.format(getString(R.string.welcome_user), user.getUsername()));
-            Log.d(TAG, "Logged user ID is not -1, user is signed in " + user);
         }
 
+        // Update the persistent data stored as a SharedPref with the logged-in user ID
         updateSharedPreference();
 
+        // Adds a listener to the My Recipes button that takes them to that page
         binding.myRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Adds a listener to the Explore Recipes button that takes them to that page
         binding.exploreRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Adds a listener to the Favorite Recipes button that takes them to that page
         binding.favoriteRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Adds a listener to the Admin button that takes them to that page
         binding.adminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,16 +99,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Log.d(TAG, "User object after entire onCreate runs login: " + user);
-        //todo: working on video 5, wondering if all this data should be on main or diff class
     }
 
-    //TODO: should this be on main? we are not displaying recipes here...Display should be on explore, myRecipes, favRecipes. video 6
-    private void insertRecipeLogRecords(){
-        RecipeLog log = new RecipeLog(mName, mIngredients, mInstructions, mCreatedBy, mIsFavorite, loggedUserID);
-        repository.insertRecipeLog(log);
-    }
 
+    /**
+     * This method attempts to check if either the shared preferences or the intent extra contain a
+     * user ID that tell the page that someone is already signed-in
+     * If a user is signed in, retrieve that user and apply user information to additional fields on the page
+     * by calling populateFields
+     * @param savedInstanceState If the activity is being re-initialized after
+     *                           previously being shut down then this Bundle contains the data it most
+     *                           recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     */
     private void loginUser(Bundle savedInstanceState) {
         // Check shared preferences for logged in user
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
@@ -132,11 +136,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Populates the welcome field in the landing page to display the user's name
+     * @param user User object with information
+     */
     private void populateFields(User user) {
         TextView textView = findViewById(R.id.welcomeUserTitle);
         textView.setText(String.format(getString(R.string.welcome_user), user.getUsername()));
     }
 
+    /**
+     * Puts the logged in userID into the instance state for logging in use
+     * @param outState Bundle in which to place your saved state.
+     */
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -144,6 +156,11 @@ public class MainActivity extends AppCompatActivity {
         updateSharedPreference();
     }
 
+    /**
+     * Adds a settings button/menu to the action bar
+     * @param menu The options menu in which you place your items.
+     * @return true always
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -151,6 +168,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Tweaks settings for the options menu and adds an onClick listener to make it usable
+     * @param menu The options menu as last shown or first initialized by
+     *             onCreateOptionsMenu().
+     * @return true always
+     */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.settingsItem);
@@ -166,6 +189,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Creates three buttons that a user can press when clicking on the Settings button on the taskbar
+     * Allows the user to logout, delete account, or cancel actions
+     */
     private void showSettingsDialog(){
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
         final AlertDialog alertDialog = alertBuilder.create();
@@ -195,15 +222,26 @@ public class MainActivity extends AppCompatActivity {
         alertBuilder.create().show();
     }
 
+    /**
+     * This method allows the user to delete their account from the database
+     */
     private void deleteAccount() {
+        // TODO: Implement delete account
     }
 
+    /**
+     * Logs user out and reset information about logged in user
+     * Sends user to login page after updating
+     */
     private void logout() {
         loggedUserID = LOGGED_OUT;
         updateSharedPreference();
         startActivity(LoginPage.loginIntentFactory(getApplicationContext()));
     }
 
+    /**
+     * General method to update shared preferences
+     */
     private void updateSharedPreference() {
         SharedPreferences sharedPreferences = getApplication().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
@@ -211,6 +249,12 @@ public class MainActivity extends AppCompatActivity {
         sharedPrefEditor.apply();
     }
 
+    /**
+     * Method used to start the main activity from other pages
+     * @param context Context of the application
+     * @param userID UserID that is used as extra information
+     * @return  The intent created with this information
+     */
     static Intent mainActivityPageIntentFactory(Context context, int userID){
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(MAIN_ACTIVITY_PAGE_USER_ID, userID);
