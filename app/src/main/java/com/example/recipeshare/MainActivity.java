@@ -49,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         repository = RecipeLogRepository.getRepository(getApplication());
 
+        Log.d(TAG, "User object before login: " + user);
+
         loginUser(savedInstanceState);
+
+        Log.d(TAG, "User object after login: " + user);
 
         if(loggedUserID == -1){
             Intent intent = LoginPage.loginIntentFactory(getApplicationContext());
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             // TODO: This is causing errors so far even with the implemented login. When retrieving a user with LiveData, it still says the user variable is null
 //            TextView textView = findViewById(R.id.welcomeUserTitle);
 //            textView.setText(String.format(getString(R.string.welcome_user), user.getUsername()));
+            Log.d(TAG, "Logged user ID is not -1, user is signed in " + user);
         }
 
         binding.myRecipesButton.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Log.d(TAG, "User object after entire onCreate runs login: " + user);
         //todo: working on video 5, wondering if all this data should be on main or diff class
     }
 
@@ -117,15 +123,19 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        user = repository.getUserByUserID(loggedUserID).getValue();
         LiveData<User> userObserver = repository.getUserByUserID(loggedUserID);
-        userObserver.observe(this, newUser -> {
-            this.user = newUser;
-            if(user != null){
+        userObserver.observe(this, user -> {
+            if(this.user != null){
                 invalidateOptionsMenu();
-            } else{
-//                logout();
+                populateFields(user);
             }
         });
+    }
+
+    private void populateFields(User user) {
+        TextView textView = findViewById(R.id.welcomeUserTitle);
+        textView.setText(String.format(getString(R.string.welcome_user), user.getUsername()));
     }
 
     @Override
