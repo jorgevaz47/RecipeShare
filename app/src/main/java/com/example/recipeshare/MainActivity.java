@@ -97,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AdminPage.adminIntentFactory(MainActivity.this);
+                startActivity(intent);
+            }
+        });
     }
 
 
