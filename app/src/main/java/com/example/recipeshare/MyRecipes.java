@@ -20,7 +20,8 @@ public class MyRecipes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_recipes);
+        binding = ActivityMyRecipesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         backButton = findViewById(R.id.backButtonMyRecipes);
 

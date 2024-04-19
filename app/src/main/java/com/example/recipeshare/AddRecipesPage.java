@@ -48,7 +48,7 @@ public class AddRecipesPage extends AppCompatActivity {
             public void onClick(View v) {
                 getInformationFromDisplay();
                 insertRecipeLogRecord();
-                //MyRecipes.updateDisplay();
+                MyRecipes.updateDisplay();
             }
         });
     }
