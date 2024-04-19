@@ -20,4 +20,6 @@ public interface RecipeLogDAO {
     @Query("SELECT * FROM " + RecipeLogDatabase.RECIPE_LOG_TABLE)
     List<RecipeLog> getAllRecords();
 
+    @Query("DELETE from " + RecipeLogDatabase.RECIPE_LOG_TABLE)
+    void deleteAll();
 }
