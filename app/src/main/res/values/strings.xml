@@ -34,4 +34,5 @@
     <string name="preference_file_key">recipeSharePreferenceFileKey</string>
     <string name="preference_userID_key">recipeSharePreferenceUserIDKey</string>
     <string name="list_of_recipes">List of Recipes</string>
+    <string name="createdBystring">%s</string>
 </resources>

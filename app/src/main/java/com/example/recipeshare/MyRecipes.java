@@ -15,6 +15,8 @@ import java.util.Locale;
 
 public class MyRecipes extends AppCompatActivity {
 
+    private static final String MY_RECIPES_PAGE_USER_ID = "com.example.recipeshare.MY_RECIPES_PAGE_USER_ID";
+
     static ActivityMyRecipesBinding binding;
     Button backButton;
     Button addButton;
@@ -40,7 +42,7 @@ public class MyRecipes extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyRecipes.this, AddRecipesPage.class);
+                Intent intent = AddRecipesPage.addRecipesIntentFactory(MyRecipes.this, getIntent().getIntExtra(MY_RECIPES_PAGE_USER_ID, -1));
                 startActivity(intent);
             }
         });
@@ -55,7 +57,9 @@ public class MyRecipes extends AppCompatActivity {
         binding.myRecipesDisplay.setText(newDisplay);
     }
 
-    static Intent myRecipesIntentFactory(Context context){
-        return new Intent(context, MyRecipes.class);
+    static Intent myRecipesIntentFactory(Context context, int userID){
+        Intent intent = new Intent(context, MyRecipes.class);
+        intent.putExtra(MY_RECIPES_PAGE_USER_ID, userID);
+        return intent;
     }
 }

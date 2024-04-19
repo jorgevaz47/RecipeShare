@@ -111,16 +111,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addInstructions" />
 
-    <EditText
-        android:id="@+id/createdByInputEditText"
+    <TextView
+        android:id="@+id/createdByTextView"
+        android:text="@string/createdBystring"
         android:layout_width="235dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:inputType="textAutoComplete"
         android:padding="8dp"
         app:layout_constraintBaseline_toBaselineOf="@id/addCreatedBy"
         app:layout_constraintStart_toEndOf="@id/addCreatedBy"
-        android:hint="@string/enter_username"
         />
 
     <Button

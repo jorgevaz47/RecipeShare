@@ -1,6 +1,7 @@
 package com.example.recipeshare.database.entities;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -28,14 +29,15 @@ public class RecipeLog {
         this.isFavorite = isFavorite;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return name + '\n' +
-                ", ingredients: " + ingredients + '\n' +
-                ", instructions: " + instructions + '\n' +
-                ", createdBy: " + createdBy + '\n' +
-                ", isFavorite: " + isFavorite +
-                '}';
+                "Ingredients: " + ingredients + '\n' +
+                "Instructions: " + instructions + '\n' +
+                "CreatedBy: " + createdBy + '\n' +
+                "Favorite: " + isFavorite + '\n' +
+                "=-=-=-=-=-=-=-=-=-=-=-=-\n";
     }
 
     @Override

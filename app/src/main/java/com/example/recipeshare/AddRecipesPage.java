@@ -1,19 +1,23 @@
 package com.example.recipeshare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.recipeshare.database.RecipeLogRepository;
 import com.example.recipeshare.database.entities.RecipeLog;
+import com.example.recipeshare.database.entities.User;
 import com.example.recipeshare.databinding.ActivityAddRecipesPageBinding;
 
 public class AddRecipesPage extends AppCompatActivity {
 
+    private static final String ADD_RECIPES_PAGE_USER_ID = "com.example.recipeshare.ADD_RECIPES_PAGE_USER_ID";
     ActivityAddRecipesPageBinding binding;
     private RecipeLogRepository repository;
 
@@ -35,6 +39,7 @@ public class AddRecipesPage extends AppCompatActivity {
 
         backButton = findViewById(R.id.backButtonAddPage);
 
+        createByField(getIntent().getIntExtra(ADD_RECIPES_PAGE_USER_ID, -1));
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,12 +69,34 @@ public class AddRecipesPage extends AppCompatActivity {
     }
 
     /**
+     *
+     */
+
+
+    public void createByField(int userID) {
+        TextView textView = findViewById(R.id.createdByTextView);
+        LiveData<User> userObserver = repository.getUserByUserID(userID);
+        userObserver.observe(this, user -> {
+            if(user != null){
+                textView.setText(String.format(getString(R.string.createdBystring), user.getUsername()));
+            }
+        });
+
+    }
+
+    /**
      * gets inputs to editTexts from user
      */
     private void getInformationFromDisplay(){
         mName = binding.nameInputEditText.getText().toString();
         mIngredients = binding.ingredientsInputEditText.getText().toString();
         mInstructions = binding.instructionsInputEditText.getText().toString();
-        mCreatedBy = binding.createdByInputEditText.getText().toString();
+        mCreatedBy = binding.createdByTextView.getText().toString();
+    }
+
+    static Intent addRecipesIntentFactory(Context context, int userID){
+        Intent intent = new Intent(context, AddRecipesPage.class);
+        intent.putExtra(ADD_RECIPES_PAGE_USER_ID, userID);
+        return intent;
     }
 }

@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         binding.myRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = MyRecipes.myRecipesIntentFactory(MainActivity.this);
+                Intent intent = MyRecipes.myRecipesIntentFactory(MainActivity.this, loggedUserID);
                 startActivity(intent);
             }
         });
