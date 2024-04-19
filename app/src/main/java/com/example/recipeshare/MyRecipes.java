@@ -42,6 +42,8 @@ public class MyRecipes extends AppCompatActivity {
         });
     }
 
+
+
     public static void updateDisplay(){
         String currentInfo = binding.myRecipesDisplay.getText().toString();
         String newDisplay = String.format(Locale.US,"Name:%s%nIngredients:%s%nInstructions:%s%nCreated By:%s%n=-=-=-=%n%s",AddRecipesPage.mName,AddRecipesPage.mIngredients,AddRecipesPage.mInstructions,AddRecipesPage.mCreatedBy,currentInfo);

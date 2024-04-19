@@ -8,13 +8,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.recipeshare.database.RecipeLogRepository;
+import com.example.recipeshare.database.entities.RecipeLog;
 import com.example.recipeshare.databinding.ActivityMainBinding;
 
 public class ExploreRecipesPage extends AppCompatActivity {
 
 
+    static String eName = "";
+    static String eIngredients = "";
+    static String eInstructions = "";
+    static String eCreatedBy = "";
+    boolean eIsFavorite = false;
     ActivityMainBinding binding;
-
+    private RecipeLogRepository repository;
     Button backButton;
 
     @Override
@@ -25,6 +32,8 @@ public class ExploreRecipesPage extends AppCompatActivity {
 
         setContentView(R.layout.activity_explore_recipes_page);
 
+        repository = RecipeLogRepository.getRepository(getApplication());
+
         backButton = findViewById(R.id.backButtonExRecipes);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +42,11 @@ public class ExploreRecipesPage extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private void insertRecipeLogRecord(){
+        RecipeLog log = new RecipeLog(eName,eIngredients,eInstructions,eCreatedBy,eIsFavorite);
+        repository.insertRecipeLog(log);
     }
 
     static Intent exploreRecipesIntentFactory(Context context){

@@ -19,15 +19,13 @@ public class RecipeLog {
     private String instructions;
     private String createdBy;
     private boolean isFavorite;
-    private int userID;
 
-    public RecipeLog(String name, String ingredients, String instructions, String createdBy, boolean isFavorite, int userID) {
+    public RecipeLog(String name, String ingredients, String instructions, String createdBy, boolean isFavorite) {
         this.name = name;
         this.ingredients = ingredients;
         this.instructions = instructions;
         this.createdBy = createdBy;
         this.isFavorite = isFavorite;
-        this.userID = userID;
     }
 
     @Override
@@ -45,12 +43,12 @@ public class RecipeLog {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RecipeLog recipeLog = (RecipeLog) o;
-        return id == recipeLog.id && isFavorite == recipeLog.isFavorite && userID == recipeLog.userID && Objects.equals(name, recipeLog.name) && Objects.equals(ingredients, recipeLog.ingredients) && Objects.equals(instructions, recipeLog.instructions) && Objects.equals(createdBy, recipeLog.createdBy);
+        return id == recipeLog.id && isFavorite == recipeLog.isFavorite && Objects.equals(name, recipeLog.name) && Objects.equals(ingredients, recipeLog.ingredients) && Objects.equals(instructions, recipeLog.instructions) && Objects.equals(createdBy, recipeLog.createdBy);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, ingredients, instructions, createdBy, isFavorite, userID);
+        return Objects.hash(id, name, ingredients, instructions, createdBy, isFavorite);
     }
 
     public int getId() {
@@ -99,13 +97,5 @@ public class RecipeLog {
 
     public void setFavorite(boolean favorite) {
         isFavorite = favorite;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 }
