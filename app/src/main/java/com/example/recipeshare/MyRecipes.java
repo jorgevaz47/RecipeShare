@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,6 +25,8 @@ public class MyRecipes extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         backButton = findViewById(R.id.backButtonMyRecipes);
+
+        binding.myRecipesDisplay.setMovementMethod(new ScrollingMovementMethod());
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +50,7 @@ public class MyRecipes extends AppCompatActivity {
 
     public static void updateDisplay(){
         String currentInfo = binding.myRecipesDisplay.getText().toString();
-        String newDisplay = String.format(Locale.US,"Name:%s%nIngredients:%s%nInstructions:%s%nCreated By:%s%n=-=-=-=%n%s",AddRecipesPage.mName,AddRecipesPage.mIngredients,AddRecipesPage.mInstructions,AddRecipesPage.mCreatedBy,currentInfo);
+        String newDisplay = String.format(Locale.US,"Name: %s%nIngredients: %s%nInstructions: %s%nCreated By: %s%n=-=-=-=%n%s",AddRecipesPage.mName,AddRecipesPage.mIngredients,AddRecipesPage.mInstructions,AddRecipesPage.mCreatedBy,currentInfo);
 
         binding.myRecipesDisplay.setText(newDisplay);
     }
