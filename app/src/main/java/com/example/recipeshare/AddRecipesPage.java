@@ -49,6 +49,7 @@ public class AddRecipesPage extends AppCompatActivity {
                 getInformationFromDisplay();
                 insertRecipeLogRecord();
                 MyRecipes.updateDisplay();
+                onBackPressed();
             }
         });
     }
