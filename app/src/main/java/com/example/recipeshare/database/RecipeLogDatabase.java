@@ -40,6 +40,7 @@ public abstract class RecipeLogDatabase extends RoomDatabase {
                             )
                             .fallbackToDestructiveMigration()
                             .addCallback(addDefaultValues)
+                            .addCallback(addDefaultRecipes)
                             .build();
 
                 }
@@ -62,6 +63,23 @@ public abstract class RecipeLogDatabase extends RoomDatabase {
 
                 User testUser1 = new User("testuser1", "testuser1");
                 dao.insert(testUser1);
+            });
+        }
+    };
+
+    private static final RoomDatabase.Callback addDefaultRecipes = new RoomDatabase.Callback(){
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db){
+            super.onCreate(db);
+            Log.i(MainActivity.TAG, "DATABASE CREATED!");
+            databaseWriteExecutor.execute(() -> {
+                RecipeLogDAO dao = INSTANCE.recipeLogDAO();
+                dao.deleteAll();
+                RecipeLog recipe1 = new RecipeLog("PB&J", "1tb Penaut Butter, 1tb Jelly, 2 Slices of bread.", "Spread penaut butter on 1 slice of bread. Spread jelly on other slice of bread. Put both slices together mixing PB&J", "Admin1", true);
+                dao.insert(recipe1);
+
+                RecipeLog recipe2 = new RecipeLog("Cereal", "1cup of cereal, 1 cup of milk.", "Put 1 cup of cereal in a bowl. Pour 1 cup of milk into bowl.", "TestUser1", false);
+                dao.insert(recipe2);
             });
         }
     };

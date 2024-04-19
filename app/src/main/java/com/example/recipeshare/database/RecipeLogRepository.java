@@ -3,6 +3,8 @@ package com.example.recipeshare.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.recipeshare.MainActivity;
 import com.example.recipeshare.database.entities.RecipeLog;
 import com.example.recipeshare.database.entities.User;
@@ -14,6 +16,7 @@ import java.util.concurrent.Future;
 
 //TODO: Refer to Gymlog video 3 @ 40 min
 public class RecipeLogRepository {
+    private static final String TAG = "com.example.recipeshare.database.RECIPE_LOG_REPOSITORY";
     private final RecipeLogDAO recipeLogDAO;
     private ArrayList<RecipeLog> allLogs;
     private static RecipeLogRepository repository;
@@ -78,4 +81,11 @@ public class RecipeLogRepository {
         });
     }
 
+    public LiveData<User> getUserByUserName(String username) {
+        return userDAO.getUserByUserName(username);
+    }
+
+    public LiveData<User> getUserByUserID(int loggedUserID) {
+        return userDAO.getUserByUserID(loggedUserID);
+    }
 }
