@@ -30,8 +30,6 @@ public class ExploreRecipesPage extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setContentView(R.layout.activity_explore_recipes_page);
-
         repository = RecipeLogRepository.getRepository(getApplication());
 
         backButton = findViewById(R.id.backButtonExRecipes);
