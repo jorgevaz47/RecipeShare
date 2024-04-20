@@ -18,7 +18,7 @@ public class LoginPage extends AppCompatActivity {
 
     ActivityLoginPageBinding binding;
 
-    private RecipeLogRepository repository;
+    RecipeLogRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,9 @@ public class LoginPage extends AppCompatActivity {
         binding.logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verifyUser();
+                String username = binding.editUsername.getText().toString();
+                String password = binding.editPassword.getText().toString();
+                verifyUser(username, password);
             }
         });
 
@@ -44,9 +46,7 @@ public class LoginPage extends AppCompatActivity {
         });
     }
 
-    private void verifyUser() {
-        String username = binding.editUsername.getText().toString();
-        String password = binding.editPassword.getText().toString();
+    void verifyUser(String username, String password) {
         if(username.isEmpty() || password.isEmpty()){
             return;
         }
@@ -66,5 +66,9 @@ public class LoginPage extends AppCompatActivity {
 
     static Intent loginIntentFactory(Context context){
         return new Intent(context, LoginPage.class);
+    }
+
+    public LoginPage(ActivityLoginPageBinding binding){
+        this.binding = binding;
     }
 }
