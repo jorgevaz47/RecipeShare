@@ -101,4 +101,10 @@ public class RecipeLogRepository {
     public LiveData<User> getUserByUserID(int loggedUserID) {
         return userDAO.getUserByUserID(loggedUserID);
     }
+
+    public void updateMyReicpes(MyRecipes myRecipes){
+        RecipeLogDatabase.databaseWriteExecutor.execute(() -> {
+            myRecipesDAO.updateMyRecipes(myRecipes);
+        });
+    }
 }
