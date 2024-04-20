@@ -28,6 +28,9 @@ public interface UserDAO {
     @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " WHERE username == :username")
     LiveData<User> getUserByUserName(String username);
 
+    @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " WHERE username == :username")
+    User getUserByUserNameNotLive(String username);
+
     @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " WHERE id == :userID")
     LiveData<User> getUserByUserID(int userID);
 }
