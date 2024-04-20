@@ -25,7 +25,7 @@ public class AddRecipesPage extends AppCompatActivity {
     static String mIngredients = "";
     static String mInstructions = "";
     static String mCreatedBy = "";
-    static boolean mIsFavorite = false;
+    static int mUserID = -1;
 
 
     Button backButton;
@@ -64,7 +64,7 @@ public class AddRecipesPage extends AppCompatActivity {
      */
 
     private void insertRecipeLogRecord(){
-        RecipeLog log = new RecipeLog(mName,mIngredients,mInstructions,mCreatedBy,mIsFavorite);
+        RecipeLog log = new RecipeLog(mName,mIngredients,mInstructions,mCreatedBy,mUserID);
         repository.insertRecipeLog(log);
     }
 
