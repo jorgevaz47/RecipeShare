@@ -8,13 +8,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.recipeshare.database.RecipeLogRepository;
+import com.example.recipeshare.databinding.ActivityAddRecipesPageBinding;
+import com.example.recipeshare.databinding.ActivitySignUpPageBinding;
+
 public class SignUpPage extends AppCompatActivity {
 
+    String mUserName = "";
+    String mPassword = "";
+
+    private RecipeLogRepository repository;
+
     Button backButton;
+
+    ActivitySignUpPageBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_page);
+        binding = ActivitySignUpPageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        repository = RecipeLogRepository.getRepository(getApplication());
 
         backButton = findViewById(R.id.backButtonSignPage);
 
@@ -24,6 +37,11 @@ public class SignUpPage extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private void getInformationFromDisplay(){
+        mUserName = binding.signUpUsername.getText().toString();
+        mPassword = binding.signUpPassword.getText().toString();
     }
 
     static Intent signUpIntentFactory(Context context){
