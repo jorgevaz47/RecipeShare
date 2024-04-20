@@ -45,4 +45,5 @@
     <string name="delete_recipes1">Delete Recipes</string>
     <string name="recipe_name">Recipe Name</string>
     <string name="enter_recipe_name">Enter Recipe Name</string>
+    <string name="no_recipes_time_to_get_cooking">No recipes! Time to get cooking!</string>
 </resources>

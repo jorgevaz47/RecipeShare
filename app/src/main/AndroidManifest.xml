@@ -28,7 +28,7 @@
             android:name=".FavoriteRecipesPage"
             android:exported="false" />
         <activity
-            android:name=".MyRecipes"
+            android:name=".MyRecipesPage"
             android:exported="false" />
         <activity
             android:name=".LoginPage"

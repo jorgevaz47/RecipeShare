@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.recipeshare.MainActivity;
+import com.example.recipeshare.database.entities.MyRecipes;
 import com.example.recipeshare.database.entities.RecipeLog;
 import com.example.recipeshare.database.entities.User;
 
@@ -18,16 +19,18 @@ import java.util.concurrent.Future;
 public class RecipeLogRepository {
     private static final String TAG = "com.example.recipeshare.database.RECIPE_LOG_REPOSITORY";
     private final RecipeLogDAO recipeLogDAO;
+    private final UserDAO userDAO;
+    private final MyRecipesDAO myRecipesDAO;
     private ArrayList<RecipeLog> allLogs;
     private ArrayList<User> allUserLogs;
     private static RecipeLogRepository repository;
 
-    private final UserDAO userDAO;
 
     private RecipeLogRepository(Application application) {
         RecipeLogDatabase db = RecipeLogDatabase.getDatabase(application);
         this.recipeLogDAO = db.recipeLogDAO();
         this.userDAO = db.userDAO();
+        this.myRecipesDAO = db.myRecipesDAO();
         this.allLogs = (ArrayList<RecipeLog>) this.recipeLogDAO.getAllRecords();
         this.allUserLogs = (ArrayList<User>) this.userDAO.getAllRecords();
     }
@@ -98,6 +101,16 @@ public class RecipeLogRepository {
         {
             userDAO.insert(user);
         });
+    }
+
+    public void insertMyRecipe(MyRecipes myRecipes){
+        RecipeLogDatabase.databaseWriteExecutor.execute(() -> {
+            myRecipesDAO.insert(myRecipes);
+        });
+    }
+
+    public LiveData<MyRecipes> getMyRecipeRecord(int userID){
+        return myRecipesDAO.getMyRecipeRecord(userID);
     }
 
     public LiveData<User> getUserByUserName(String username) {

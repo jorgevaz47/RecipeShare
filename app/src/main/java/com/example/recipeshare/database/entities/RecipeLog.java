@@ -13,7 +13,7 @@ import java.util.Objects;
 public class RecipeLog {
     //Refer to GymLog video 3 @ 7 min
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int id;
     private String name;
     private String ingredients;
@@ -22,6 +22,8 @@ public class RecipeLog {
     private int userID;
 
     public RecipeLog(String name, String ingredients, String instructions, String createdBy, int userID) {
+        String uniqueID = name + ingredients + instructions + createdBy + userID;
+        this.id = uniqueID.hashCode();
         this.name = name;
         this.ingredients = ingredients;
         this.instructions = instructions;
