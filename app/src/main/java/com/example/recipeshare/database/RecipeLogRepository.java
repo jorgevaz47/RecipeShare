@@ -19,6 +19,7 @@ public class RecipeLogRepository {
     private static final String TAG = "com.example.recipeshare.database.RECIPE_LOG_REPOSITORY";
     private final RecipeLogDAO recipeLogDAO;
     private ArrayList<RecipeLog> allLogs;
+    private ArrayList<User> allUserLogs;
     private static RecipeLogRepository repository;
 
     private final UserDAO userDAO;
@@ -28,6 +29,7 @@ public class RecipeLogRepository {
         this.recipeLogDAO = db.recipeLogDAO();
         this.userDAO = db.userDAO();
         this.allLogs = (ArrayList<RecipeLog>) this.recipeLogDAO.getAllRecords();
+        this.allUserLogs = (ArrayList<User>) this.userDAO.getAllRecords();
     }
 
     public static RecipeLogRepository getRepository(Application application){
@@ -63,6 +65,23 @@ public class RecipeLogRepository {
         }catch (InterruptedException | ExecutionException e){
             e.printStackTrace();
             Log.i(MainActivity.TAG, "Problem when getting all RecipeLogs in repository");
+        }
+        return null;
+    }
+
+    public ArrayList<User> getAllUserLogs() {
+        Future<ArrayList<User>> future = RecipeLogDatabase.databaseWriteExecutor.submit(
+                new Callable<ArrayList<User>>() {
+                    @Override
+                    public ArrayList<User> call() throws Exception {
+                        return (ArrayList<User>) userDAO.getAllRecords();
+                    }
+                });
+        try{
+            return future.get();
+        }catch (InterruptedException | ExecutionException e){
+            e.printStackTrace();
+            Log.i(MainActivity.TAG, "Problem when getting all UserLogs in repository");
         }
         return null;
     }

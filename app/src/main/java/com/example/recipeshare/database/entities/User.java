@@ -1,5 +1,6 @@
 package com.example.recipeshare.database.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -19,6 +20,16 @@ public class User {
         this.username = username;
         this.password = password;
         isAdmin = false;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return username + '\n' +
+                "Password: " + password + '\n' +
+                "Admin: " + isAdmin + '\n' +
+                "UserID: " + id + '\n' +
+                "=-=-=-=-=-=-=-=-=-=-=-=-\n";
     }
 
     @Override
