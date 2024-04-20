@@ -118,4 +118,11 @@ public class RecipeLogRepository {
             userDAO.deleteUser(id);
         });
     }
+
+    public void deleteRecipe(String name){
+        RecipeLogDatabase.databaseWriteExecutor.execute(() ->
+        {
+            recipeLogDAO.deleteRecipes(name);
+        });
+    }
 }

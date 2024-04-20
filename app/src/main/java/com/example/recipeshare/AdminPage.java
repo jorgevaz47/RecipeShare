@@ -37,6 +37,14 @@ public class AdminPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.deleteRecipesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = DeleteRecipes.deleteRecipesIntentFactory(AdminPage.this);
+                startActivity(intent);
+            }
+        });
     }
 
     static Intent adminIntentFactory(Context context){

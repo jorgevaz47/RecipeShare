@@ -42,4 +42,7 @@
     <string name="userid">UserID:</string>
     <string name="enter_user_id">Enter User ID</string>
     <string name="delete">Delete</string>
+    <string name="delete_recipes1">Delete Recipes</string>
+    <string name="recipe_name">Recipe Name</string>
+    <string name="enter_recipe_name">Enter Recipe Name</string>
 </resources>

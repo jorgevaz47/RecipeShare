@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeleteAccounts">
+    tools:context=".DeleteRecipes">
 
     <TextView
-        android:id="@+id/deleteAccountsTitle"
+        android:id="@+id/deleteRecipesTitle"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginTop="48dp"
         android:gravity="center"
-        android:text="@string/delete_accounts1"
+        android:text="@string/delete_recipes1"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/deleteAccountsDisplay"
+        android:id="@+id/deleteRecipesDisplay"
         android:layout_width="378dp"
         android:layout_height="359dp"
         android:layout_marginTop="36dp"
@@ -28,10 +28,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminPageTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/deleteRecipesTitle" />
 
     <Button
-        android:id="@+id/backButtonDeleteAccounts"
+        android:id="@+id/backButtonDeleteRecipes"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -43,31 +43,31 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/deleteUserTextView"
+        android:id="@+id/deleteRecipesTextView"
         android:layout_width="132dp"
         android:layout_height="37dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
-        android:text="@string/userid"
+        android:text="@string/recipe_name"
         android:textSize="23sp"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deleteAccountsDisplay" />
+        app:layout_constraintTop_toBottomOf="@id/deleteRecipesDisplay" />
 
     <EditText
-        android:id="@+id/deleteUserIdEditText"
+        android:id="@+id/deleteRecipesEditText"
         android:layout_width="235dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:inputType="number"
+        android:inputType="textAutoCorrect"
         android:padding="8dp"
-        app:layout_constraintBaseline_toBaselineOf="@id/deleteUserTextView"
-        app:layout_constraintStart_toEndOf="@id/deleteUserTextView"
-        android:hint="@string/enter_user_id"
+        app:layout_constraintBaseline_toBaselineOf="@id/deleteRecipesTextView"
+        app:layout_constraintStart_toEndOf="@id/deleteRecipesTextView"
+        android:hint="@string/enter_recipe_name"
         />
 
     <Button
-        android:id="@+id/deleteAccountsButton"
+        android:id="@+id/deleteRecipesButton"
         android:layout_width="174dp"
         android:layout_height="68dp"
         android:layout_marginTop="56dp"
@@ -76,7 +76,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/deleteUserIdEditText" />
-
+        app:layout_constraintTop_toTopOf="@id/deleteRecipesEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
