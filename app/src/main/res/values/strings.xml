@@ -39,4 +39,7 @@
     <string name="delete_recipes">Delete Recipes</string>
     <string name="view_feedback">View Feedback</string>
     <string name="delete_accounts1">Delete Accounts</string>
+    <string name="userid">UserID:</string>
+    <string name="enter_user_id">Enter User ID</string>
+    <string name="delete">Delete</string>
 </resources>

@@ -20,6 +20,8 @@ public class DeleteAccounts extends AppCompatActivity {
     ActivityDeleteAccountsBinding binding;
     private RecipeLogRepository repository;
 
+    int userID = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,15 @@ public class DeleteAccounts extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        binding.deleteAccountsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getInformationFromDisplay();
+                deleteAccount();
+                deleteUsersDisplay();
+            }
+        });
     }
 
     private void deleteUsersDisplay(){
@@ -48,6 +59,14 @@ public class DeleteAccounts extends AppCompatActivity {
             sb.append(log);
         }
         binding.deleteAccountsDisplay.setText(sb.toString());
+    }
+
+    private void getInformationFromDisplay(){
+        userID = Integer.parseInt(binding.deleteUserIdEditText.getText().toString());
+    }
+
+    private void deleteAccount(){
+        repository.deleteUser(userID);
     }
 
     static Intent deleteAccountsIntentFactory(Context context){

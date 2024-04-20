@@ -30,6 +30,10 @@ public interface UserDAO {
     @Query("DELETE from " + RecipeLogDatabase.USER_TABLE)
     void deleteAll();
 
+    @Query("DELETE from " + RecipeLogDatabase.USER_TABLE + " WHERE id == :userid")
+    void deleteUser(int userid);
+
+
     @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " WHERE username == :username")
     LiveData<User> getUserByUserName(String username);
 

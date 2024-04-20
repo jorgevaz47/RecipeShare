@@ -111,4 +111,11 @@ public class RecipeLogRepository {
     public User getUserByUserNameNotLive(String mUserName) {
         return userDAO.getUserByUserNameNotLive(mUserName);
     }
+
+    public void deleteUser(int id){
+        RecipeLogDatabase.databaseWriteExecutor.execute(() ->
+        {
+            userDAO.deleteUser(id);
+        });
+    }
 }
