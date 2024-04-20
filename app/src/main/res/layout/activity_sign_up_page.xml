@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginPage">
+    tools:context=".SignUpPage">
 
     <TextView
         android:id="@+id/appTitle"
@@ -20,12 +20,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/loginString"
+        android:id="@+id/signUpString"
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:text="@string/please_sign_in"
+        android:text="@string/please_sign_up"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
     <EditText
-        android:id="@+id/editUsername"
+        android:id="@+id/signUpUsername"
         android:layout_width="275dip"
         android:layout_height="75dip"
         android:layout_marginTop="24dp"
@@ -43,10 +43,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginString" />
+        app:layout_constraintTop_toBottomOf="@id/signUpString" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/signUpPassword"
         android:layout_width="275dip"
         android:layout_height="75dip"
         android:layout_marginTop="24dp"
@@ -56,30 +56,30 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editUsername" />
+        app:layout_constraintTop_toBottomOf="@id/signUpUsername" />
 
     <Button
-        android:id="@+id/logInButton"
+        android:id="@+id/backButtonSignPage"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/back"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/createAccountButton"
         android:layout_width="200dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="64dp"
-        android:text="@string/log_in"
+        android:layout_height="100dp"
+        android:layout_marginTop="84dp"
+        android:text="@string/create_account"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editPassword" />
-
-    <Button
-        android:id="@+id/signUpButton"
-        android:layout_width="200dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/sign_up"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logInButton" />
+        app:layout_constraintTop_toBottomOf="@id/signUpPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

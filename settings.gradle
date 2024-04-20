@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "RecipeShare"
-include(":app")
+include ':app'
  

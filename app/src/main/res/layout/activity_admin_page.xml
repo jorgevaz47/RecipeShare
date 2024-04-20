@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".AdminPage">
 
     <TextView
-        android:id="@+id/welcomeUserTitle"
+        android:id="@+id/adminPageTitle"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginTop="48dp"
         android:gravity="center"
-        android:text="@string/welcome_user"
+        android:text="@string/admin_tools"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -20,52 +20,52 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/exploreRecipesButton"
+        android:id="@+id/backButtonAdminPage"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/back"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/deleteAccountsButton"
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/explore_recipes"
+        android:layout_marginTop="52dp"
+        android:text="@string/delete_accounts"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeUserTitle" />
+        app:layout_constraintTop_toBottomOf="@id/adminPageTitle" />
 
     <Button
-        android:id="@+id/myRecipesButton"
+        android:id="@+id/deleteRecipesButton"
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/my_recipes"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/exploreRecipesButton" />
-
-    <Button
-        android:id="@+id/favoriteRecipesButton"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/favorite_recipes"
+        android:layout_marginTop="68dp"
+        android:text="@string/delete_recipes"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myRecipesButton" />
+        app:layout_constraintTop_toBottomOf="@id/deleteAccountsButton" />
 
     <Button
-        android:id="@+id/adminButton"
+        android:id="@+id/viewFeedbackButton"
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/admin"
+        android:layout_marginTop="68dp"
+        android:text="@string/view_feedback"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/favoriteRecipesButton"
-        />
+        app:layout_constraintTop_toBottomOf="@id/deleteRecipesButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

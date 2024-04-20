@@ -10,10 +10,34 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.RecipeShare"
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".DeleteRecipes"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteAccounts"
+            android:exported="false" />
+        <activity
+            android:name=".AddRecipesPage"
+            android:exported="false" />
+        <activity
+            android:name=".AdminPage"
+            android:exported="false" />
+        <activity
+            android:name=".FavoriteRecipesPage"
+            android:exported="false" />
+        <activity
+            android:name=".MyRecipesPage"
+            android:exported="false" />
+        <activity
             android:name=".LoginPage"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpPage"
+            android:exported="false" />
+        <activity
+            android:name=".ExploreRecipesPage"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
