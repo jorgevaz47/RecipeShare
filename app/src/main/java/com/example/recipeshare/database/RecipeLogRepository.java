@@ -138,9 +138,4 @@ public class RecipeLogRepository {
             recipeLogDAO.deleteRecipes(name);
         });
     }
-    public void updateMyReicpes(MyRecipes myRecipes){
-        RecipeLogDatabase.databaseWriteExecutor.execute(() -> {
-            myRecipesDAO.updateMyRecipes(myRecipes);
-        });
-    }
 }

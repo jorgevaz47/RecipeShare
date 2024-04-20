@@ -6,7 +6,6 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.example.recipeshare.database.entities.MyRecipes;
 
@@ -14,9 +13,6 @@ import com.example.recipeshare.database.entities.MyRecipes;
 public interface MyRecipesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(MyRecipes myRecipes);
-
-    @Update
-    void updateMyRecipes(MyRecipes myRecipes);
 
     @Query("SELECT * FROM " + RecipeLogDatabase.MY_RECIPES_TABLE + " WHERE userID == :userID")
     LiveData<MyRecipes> getMyRecipeRecord(int userID);

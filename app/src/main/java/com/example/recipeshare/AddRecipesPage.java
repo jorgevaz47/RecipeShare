@@ -64,7 +64,6 @@ public class AddRecipesPage extends AppCompatActivity {
      * inserts inputs from user into our database
      */
 
-    // TODO: Issue with updating the MyRecipes record. Loops over many times. Likely due to the observer/Live data
     private void insertRecipeLogRecord(){
         mUserID = getIntent().getIntExtra(ADD_RECIPES_PAGE_USER_ID, -1);
 
@@ -77,18 +76,22 @@ public class AddRecipesPage extends AppCompatActivity {
         LiveData<MyRecipes> myRecipesObserver = repository.getMyRecipeRecord(mUserID);
 
         myRecipesObserver.observe(this, myRecipes -> {
-            if(myRecipes == null){
+            if(myRecipes == null || myRecipes.getMyRecipes().isEmpty()){
                 MyRecipes recipe = new MyRecipes(mUserID);
                 recipe.getMyRecipes().add(log);
-                repository.updateMyReicpes(recipe);
             } else{
                 myRecipes.getMyRecipes().add(log);
-                repository.updateMyReicpes(myRecipes);
             }
+            repository.insertMyRecipe(myRecipes);
         });
 
         repository.insertRecipeLog(log);
     }
+
+    /**
+     *
+     */
+
 
     public void createByField(int userID) {
         TextView textView = findViewById(R.id.createdByTextView);
