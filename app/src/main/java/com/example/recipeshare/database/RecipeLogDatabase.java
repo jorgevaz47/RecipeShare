@@ -7,9 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.recipeshare.MainActivity;
+import com.example.recipeshare.database.converters.RecipeLogListConverter;
+import com.example.recipeshare.database.entities.MyRecipes;
 import com.example.recipeshare.database.entities.RecipeLog;
 import com.example.recipeshare.database.entities.User;
 
@@ -19,9 +22,11 @@ import java.util.concurrent.Executors;
 //TODO: Refer to Gymlog video 3 @ 16 min
 
 //TODO: version represents the dimension of our database, I think it's 1 idk...on Video7 @ 24min
-@Database(entities = {RecipeLog.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {RecipeLog.class, User.class, MyRecipes.class}, version = 1, exportSchema = false)
+@TypeConverters(RecipeLogListConverter.class)
 public abstract class RecipeLogDatabase extends RoomDatabase {
 
+    public static final String MY_RECIPES_TABLE = "myRecipesTable";
     private static final String DATABASE_NAME = "RecipeLogDatabase";
     public static final String RECIPE_LOG_TABLE = "recipeLogTable";
     public static final String USER_TABLE = "userTable";
@@ -74,12 +79,16 @@ public abstract class RecipeLogDatabase extends RoomDatabase {
             Log.i(MainActivity.TAG, "DATABASE CREATED!");
             databaseWriteExecutor.execute(() -> {
                 RecipeLogDAO dao = INSTANCE.recipeLogDAO();
+                MyRecipesDAO myRecipesDAO = INSTANCE.myRecipesDAO();
+                myRecipesDAO.deleteAll();
                 dao.deleteAll();
                 RecipeLog recipe1 = new RecipeLog("PB&J", "1tb Penaut Butter, 1tb Jelly, 2 Slices of bread.", "Spread penaut butter on 1 slice of bread. Spread jelly on other slice of bread. Put both slices together mixing PB&J", "Admin1", 1);
                 dao.insert(recipe1);
+                myRecipesDAO.insert(new MyRecipes(1));
 
                 RecipeLog recipe2 = new RecipeLog("Cereal", "1cup of cereal, 1 cup of milk.", "Put 1 cup of cereal in a bowl. Pour 1 cup of milk into bowl.", "TestUser1", 2);
                 dao.insert(recipe2);
+                myRecipesDAO.insert(new MyRecipes(2));
             });
         }
     };
@@ -87,5 +96,5 @@ public abstract class RecipeLogDatabase extends RoomDatabase {
 
     public abstract RecipeLogDAO recipeLogDAO();
     public abstract UserDAO userDAO();
-
+    public abstract MyRecipesDAO myRecipesDAO();
 }

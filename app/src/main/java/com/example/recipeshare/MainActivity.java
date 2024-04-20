@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.recipeshare.database.RecipeLogRepository;
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         binding.myRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = MyRecipes.myRecipesIntentFactory(MainActivity.this, loggedUserID);
+                Intent intent = MyRecipesPage.myRecipesIntentFactory(MainActivity.this, loggedUserID);
                 startActivity(intent);
             }
         });

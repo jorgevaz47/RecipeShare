@@ -35,4 +35,5 @@
     <string name="preference_userID_key">recipeSharePreferenceUserIDKey</string>
     <string name="list_of_recipes">List of Recipes</string>
     <string name="createdBystring">%s</string>
+    <string name="no_recipes_time_to_get_cooking">No recipes! Time to get cooking!</string>
 </resources>
