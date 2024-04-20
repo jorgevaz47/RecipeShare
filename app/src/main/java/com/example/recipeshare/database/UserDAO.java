@@ -7,12 +7,14 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.recipeshare.database.entities.RecipeLog;
 import com.example.recipeshare.database.entities.User;
 
 import java.util.List;
 
 @Dao
 public interface UserDAO {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
 
@@ -20,13 +22,23 @@ public interface UserDAO {
     void delete(User user);
 
     @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " ORDER BY username")
+    List<User> getAllRecords();
+
+    @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " ORDER BY username")
     LiveData<List<User>> getAllUsers();
 
     @Query("DELETE from " + RecipeLogDatabase.USER_TABLE)
     void deleteAll();
 
+    @Query("DELETE from " + RecipeLogDatabase.USER_TABLE + " WHERE id == :userid")
+    void deleteUser(int userid);
+
+
     @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " WHERE username == :username")
     LiveData<User> getUserByUserName(String username);
+
+    @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " WHERE username == :username")
+    User getUserByUserNameNotLive(String username);
 
     @Query("SELECT * FROM " + RecipeLogDatabase.USER_TABLE + " WHERE id == :userID")
     LiveData<User> getUserByUserID(int userID);

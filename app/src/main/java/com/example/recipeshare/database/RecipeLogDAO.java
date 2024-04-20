@@ -22,4 +22,7 @@ public interface RecipeLogDAO {
 
     @Query("DELETE from " + RecipeLogDatabase.RECIPE_LOG_TABLE)
     void deleteAll();
+
+    @Query("DELETE from " + RecipeLogDatabase.RECIPE_LOG_TABLE + " WHERE name == :name")
+    void deleteRecipes(String name);
 }

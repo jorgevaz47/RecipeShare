@@ -35,4 +35,14 @@
     <string name="preference_userID_key">recipeSharePreferenceUserIDKey</string>
     <string name="list_of_recipes">List of Recipes</string>
     <string name="createdBystring">%s</string>
+    <string name="delete_accounts">Delete Accounts</string>
+    <string name="delete_recipes">Delete Recipes</string>
+    <string name="view_feedback">View Feedback</string>
+    <string name="delete_accounts1">Delete Accounts</string>
+    <string name="userid">UserID:</string>
+    <string name="enter_user_id">Enter User ID</string>
+    <string name="delete">Delete</string>
+    <string name="delete_recipes1">Delete Recipes</string>
+    <string name="recipe_name">Recipe Name</string>
+    <string name="enter_recipe_name">Enter Recipe Name</string>
 </resources>
